@@ -1,0 +1,17 @@
+                            <Avatar
+                              firstName={ele.name?.split(" ").length ? ele.name.split(" ")[0] : (ele.name as string)}
+                              lastName={
+                                ele && ele.name && ele.name?.split(" ").length > 1
+                                  ? ele.name?.split(" ")[ele.name.split(" ").length - 1]
+                                  : ""
+                              }
+                              theme={theme}
+                              overWrittenStyles={{
+                                width: "25px",
+                                height: "25px",
+                                fontSize: theme.fontSizes.h8,
+                                marginRight: "5px",
+                                fontFamily: theme.fontFamilies.primary.bold,
+                                backgroundColor: agentListBgColorOptions[dataIndex % agentListBgColorOptions.length],
+                              }}
+                            />

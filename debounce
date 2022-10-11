@@ -1,0 +1,70 @@
+import React from "react";
+import { ITheme } from "src/lib/interfaces";
+import { css } from "@emotion/react";
+import Image from "next/image";
+import styles from "./Search.module.scss";
+
+export interface IDebouncingSearch {
+  theme: ITheme;
+  placeholder?: string;
+  styles?: object;
+  onChange?: Function;
+}
+
+function DebouncingSearch({ theme, placeholder, styles: newStyles, onChange }: IDebouncingSearch) {
+  const searchStyles: any = {
+    height: "10px",
+    width: "370px",
+  };
+
+  const appliedStyles = { ...searchStyles, ...newStyles };
+
+  const [debounce, setDebounce] = React.useState("");
+  React.useEffect(() => {
+    const getData = setTimeout(() => {
+      console.log("h");
+    }, 2000);
+    return () => clearTimeout(getData);
+  }, [debounce]);
+
+  return (
+    <div
+      className={styles["search-wrapper"]}
+      css={css`
+        background-color: ${theme.colors.tertiary.main};
+        width: ${appliedStyles.width};
+      `}
+    >
+      <Image
+        className={styles["search-icon"]}
+        src="/images/tickets/overview/Icon ionic-ios-search.svg"
+        alt="search"
+        height="13px"
+        width="13px"
+      />
+      <input
+        type="text"
+        placeholder={placeholder}
+        className={styles["search-bar"]}
+        onChange={(event) => setDebounce(event.target.value)}
+        css={css`
+          font-family: ${theme.fontFamilies.primary.regular};
+          height: ${appliedStyles.height};
+          width: calc(80%);
+
+          border: none;
+          outline: none;
+          background-color: ${theme.colors.tertiary.main};
+        `}
+      />
+    </div>
+  );
+}
+DebouncingSearch.defaultProps = {
+  styles: {},
+  placeholder: "Search",
+  onChange: null,
+};
+
+export default DebouncingSearch;
+

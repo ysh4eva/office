@@ -1,0 +1,55 @@
+// const inputRef = useRef();
+  // const timeout = useRef<ReturnType<typeof setInterval>>(null);
+  // const handleDebounceSearch = () => {
+  //   clearTimeout(timeout.current);
+
+  //   timeout.current = setTimeout(() => {
+  //   //  if (inputRef.current.value !== "") console.log(inputRef.current.value);
+  //   }, timedelay);
+  // };
+  // // Debouncing
+
+//   const handleDebounceSearch = useDebounce(getSuggestions, timedelay);
+
+//   return (
+//     <div
+//       className={styles["search-wrapper"]}
+//       css={css`
+//         background-color: ${theme.colors.tertiary.main};
+//         width: ${appliedStyles.width};
+//       `}
+//     >
+//       <Image
+//         className={styles["search-icon"]}
+//         src="/images/tickets/overview/Icon ionic-ios-search.svg"
+//         alt="search"
+//         height="13px"
+//         width="13px"
+//       />
+//       <input
+//         type="text"
+//         placeholder={placeholder}
+//         className={styles["search-bar"]}
+//         ref={inputRef} // For capturing keystroke
+//         // onChange={handleDebounceSearch}
+//         onkeyup="handleDebounceSearch()"
+//         css={css`
+//           font-family: ${theme.fontFamilies.primary.regular};
+//           height: ${appliedStyles.height};
+//           width: calc(80%);
+//           border: none;
+//           outline: none;
+//           background-color: ${theme.colors.tertiary.main};
+//         `}
+//       />
+//     </div>
+//   );
+// }
+// DebouncingSearch.defaultProps = {
+//   styles: {},
+//   placeholder: "Search",
+//   timedelay: "150",
+// };
+
+// export default DebouncingSearch;
+

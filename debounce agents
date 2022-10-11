@@ -1,0 +1,70 @@
+import { useEffect, useMemo, useState } from "react";
+import getTheme from "src/blocs/get-theme";
+import LeftPanel from "src/components/navigation/left-panel/LeftPanel";
+import { ITheme } from "src/lib/interfaces";
+import CountriesList from "src/components/inputs/search/countrylist.json";
+import useDebounce from "src/services/debounce";
+import DebouncingSearch from "src/components/inputs/search/Search";
+
+import { leftPanelPaths } from "src/lib/constants";
+import styles from "../../shared/overview.module.scss";
+
+function CountryListItem({ name, region }) {
+  return (
+    <li className="list-group-item d-flex">
+      <div className="d-inline">{name}</div>
+      <div className="col pt-2">
+        {name} <span className="badge badge-info">{region}</span>
+      </div>
+    </li>
+  );
+}
+function AgentPerformance() {
+  const [theme, setTheme] = useState<ITheme>({} as ITheme);
+  const [loader, setLoader] = useState(true);
+  useEffect(() => {
+    setTheme(getTheme());
+    setLoader(false);
+  }, []);
+
+  const [search, setSearch] = useState("");
+
+  const debouncedSearchTerm = useDebounce(search, 1000);
+  const countries = useMemo(() => {
+    if (!search) return CountriesList;
+
+    return CountriesList.filter(
+      (country) =>
+        country.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+        country.region.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+    );
+  }, [search, debouncedSearchTerm]);
+
+  if (loader) return <div>loading</div>;
+
+  return (
+    <div className={styles["overview-background"]}>
+      <div className={styles["left-panel"]}>
+        <LeftPanel theme={theme} leftPanelPaths={leftPanelPaths} />
+        {/* {Dropdown todo */}
+      </div>
+      <div className={styles["overview-display"]}>Agent Page</div>
+
+      <DebouncingSearch theme={theme} onChange={setSearch} />
+      <div className="col-12">
+        <ul className="list-group text-left">
+          {countries.map((country) => (
+            <CountryListItem {...country} key={country.name} />
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+export default AgentPerformance;
+111111111111111111111111111111111111111111111111111111
+
+
+
+
